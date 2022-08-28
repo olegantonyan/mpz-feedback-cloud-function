@@ -11,29 +11,12 @@ GEM
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     dry-inflector (0.3.0)
-    faraday (1.10.2)
-      faraday-em_http (~> 1.0)
-      faraday-em_synchrony (~> 1.0)
-      faraday-excon (~> 1.1)
-      faraday-httpclient (~> 1.0)
-      faraday-multipart (~> 1.0)
-      faraday-net_http (~> 1.0)
-      faraday-net_http_persistent (~> 1.0)
-      faraday-patron (~> 1.0)
-      faraday-rack (~> 1.0)
-      faraday-retry (~> 1.0)
+    faraday (2.5.2)
+      faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
-    faraday-em_http (1.0.0)
-    faraday-em_synchrony (1.0.0)
-    faraday-excon (1.1.0)
-    faraday-httpclient (1.0.1)
     faraday-multipart (1.0.4)
       multipart-post (~> 2)
-    faraday-net_http (1.0.1)
-    faraday-net_http_persistent (1.2.0)
-    faraday-patron (1.0.0)
-    faraday-rack (1.0.0)
-    faraday-retry (1.0.3)
+    faraday-net_http (3.0.0)
     functions_framework (1.2.0)
       cloud_events (>= 0.7.0, < 2.a)
       puma (>= 4.3.0, < 6.a)
@@ -45,9 +28,10 @@ GEM
       nio4r (~> 2.0)
     rack (2.2.4)
     ruby2_keywords (0.0.5)
-    telegram-bot-ruby (0.19.2)
+    telegram-bot-ruby (0.21.0)
       dry-inflector
-      faraday (~> 1.0)
+      faraday (~> 2.0)
+      faraday-multipart (~> 1.0)
       virtus (~> 2.0)
     thread_safe (0.3.6)
     virtus (2.0.0)
@@ -59,7 +43,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  faraday (< 2)
   functions_framework
   telegram-bot-ruby
 
