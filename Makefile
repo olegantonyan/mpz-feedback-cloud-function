@@ -4,14 +4,15 @@ include ${LOCAL_ENV_FILE}
 FUNCTION_ENTRYPOINT=mpz-feedback
 NAME=mpz-feedback
 GOOGLE_CLOUD_PROJECT=random-360814
-INVOKE_URL=https://us-central1-$(GOOGLE_CLOUD_PROJECT).cloudfunctions.net/$(NAME)
+REGION=us-central1
+INVOKE_URL=https://$(REGION)-$(GOOGLE_CLOUD_PROJECT).cloudfunctions.net/$(NAME)
 
 ENV_VARS=$(shell ruby -e "print '--set-env-vars=' + File.readlines('${LOCAL_ENV_FILE}').map { |l| l.gsub('export ', '').strip }.join(',')")
 
 all: local_server
 
 deploy:
-	gcloud --project=$(GOOGLE_CLOUD_PROJECT) functions deploy $(NAME) --entry-point $(FUNCTION_ENTRYPOINT) --max-instances 1 $(ENV_VARS) --trigger-http --runtime ruby30
+	gcloud --project=$(GOOGLE_CLOUD_PROJECT) functions deploy $(NAME) --entry-point $(FUNCTION_ENTRYPOINT) --max-instances 1 $(ENV_VARS) --trigger-http --runtime ruby30 --memory=128M --timeout=20 --region $(REGION)
 	@echo $(INVOKE_URL)
 
 undeploy:
