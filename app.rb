@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 require 'functions_framework'
 require 'telegram/bot'
 
 FunctionsFramework.http('mpz-feedback') do |request|
   data = JSON.parse(request.body.read)
 
-  author = data.fetch('author', nil)
+  author = data.fetch('author', '')
   text = data.fetch('text')
-  sysinfo = data.fetch('sysinfo', nil)
+  sysinfo = data.fetch('sysinfo', '')
 
   notification = ''
-  notification += "#{author}: " if author
+  notification += "#{author}: " unless author.empty?
   notification += text
-  notification += "\n\n#{sysinfo}" if sysinfo
+  notification += "\n\n#{sysinfo}" unless sysinfo.empty?
 
   telegram_api_key = ENV.fetch('TELEGRAM_API_KEY')
   telegram_chat_id = ENV.fetch('TELEGRAM_CHAT_ID')
