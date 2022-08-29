@@ -3,7 +3,7 @@
 require 'functions_framework'
 require 'telegram/bot'
 
-FunctionsFramework.http('mpz-feedback') do |request|
+FunctionsFramework.http('call') do |request|
   data = JSON.parse(request.body.read)
 
   author = data.fetch('author', '')

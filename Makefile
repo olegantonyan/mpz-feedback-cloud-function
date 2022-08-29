@@ -1,7 +1,7 @@
 LOCAL_ENV_FILE=.env.local
 include ${LOCAL_ENV_FILE}
 
-FUNCTION_ENTRYPOINT=mpz-feedback
+FUNCTION_ENTRYPOINT=call
 NAME=mpz-feedback
 GOOGLE_CLOUD_PROJECT=random-360814
 REGION=us-central1
