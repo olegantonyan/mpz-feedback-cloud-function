@@ -7,12 +7,12 @@ GOOGLE_CLOUD_PROJECT=random-360814
 REGION=us-central1
 INVOKE_URL=https://$(REGION)-$(GOOGLE_CLOUD_PROJECT).cloudfunctions.net/$(NAME)
 
-ENV_VARS=$(shell ruby -e "print '--set-env-vars=' + File.readlines('${LOCAL_ENV_FILE}').map { |l| l.gsub('export ', '').strip }.join(',')")
+ENV_VARS=$(shell ruby -e "print File.readlines('${LOCAL_ENV_FILE}').map { |l| l.gsub('export ', '').strip }.join(',')")
 
 all: local_server
 
 deploy:
-	gcloud --project=$(GOOGLE_CLOUD_PROJECT) functions deploy $(NAME) --entry-point $(FUNCTION_ENTRYPOINT) --max-instances 1 $(ENV_VARS) --trigger-http --runtime ruby30 --memory=128M --timeout=20 --region $(REGION) --allow-unauthenticated
+	gcloud --project=$(GOOGLE_CLOUD_PROJECT) functions deploy $(NAME) --entry-point $(FUNCTION_ENTRYPOINT) --max-instances 1 --set-env-vars=$(ENV_VARS) --trigger-http --runtime ruby30 --memory=128M --timeout=20 --region $(REGION) --allow-unauthenticated
 	@echo $(INVOKE_URL)
 
 undeploy:
