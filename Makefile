@@ -21,5 +21,10 @@ undeploy:
 local_server:
 	bundle exec functions-framework-ruby --target=$(FUNCTION_ENTRYPOINT) --port=3001 --detailed-errors --verbose
 
+test_local:
+	curl -X POST http://localhost:3001 -H "Content-Type: application/json" --data '{"text": "Test text", "author": "TestUser", "sysinfo": "TestSysinfo"}'
+
 test_production:
 	curl -X POST $(INVOKE_URL) -H "Content-Type: application/json" --data '{"text": "Test text", "author": "TestUser", "sysinfo": "TestSysinfo"}'
+
+.PHONY: deploy undeploy local_server test_local test_production
