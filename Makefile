@@ -12,7 +12,7 @@ ENV_VARS=$(shell ruby -e "print File.readlines('${LOCAL_ENV_FILE}').map { |l| l.
 all: local_server
 
 deploy:
-	gcloud --project=$(GOOGLE_CLOUD_PROJECT) functions deploy $(NAME) --entry-point $(FUNCTION_ENTRYPOINT) --max-instances 1 --set-env-vars=$(ENV_VARS) --trigger-http --runtime ruby30 --memory=128M --timeout=20 --region $(REGION) --allow-unauthenticated
+	gcloud --project=$(GOOGLE_CLOUD_PROJECT) functions deploy $(NAME) --entry-point $(FUNCTION_ENTRYPOINT) --max-instances 1 --set-env-vars=$(ENV_VARS) --trigger-http --runtime ruby32 --memory=128Mi --timeout=20 --region $(REGION) --allow-unauthenticated --gen2
 	@echo $(INVOKE_URL)
 
 undeploy:
